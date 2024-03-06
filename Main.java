@@ -1,24 +1,18 @@
 import javax.swing.*;
 
+
 public class Main {
 
-    public static JFrame frame = new JFrame("Puzzle15");
+    public static JFrame frame = new JFrame("Chess");
 
     public static void main(String[] args) {
-        GUI_Puzzle15 gui = new GUI_Puzzle15();
-        frame.add(gui);
+        ChessBoard_GUI chessBoard_gui = new ChessBoard_GUI();
+        frame.add(chessBoard_gui);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(496, 700);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
 
-
     }
 }
-
-
-
-
-
-
