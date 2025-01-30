@@ -1,6 +1,5 @@
 import com.sun.jna.*;
 import com.sun.jna.win32.StdCallLibrary;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
