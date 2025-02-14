@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="jna-jpms-5.16.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/DrawingRust/Resources/jna-jpms-5.16.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Java-projects/DrawingRust/Resources/jna-jpms-5.16.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
