@@ -19,8 +19,8 @@ public class Board {
     // metode der generer et nyt board:
     private String[][][]genNewBoard(int[] size, int bombCount, int[] startCords){
         String[][][] newBoard = new String[size[0]][size[1]][2];
-        int x1 = startCords[0];
-        int y1 = startCords[1];
+        //int x1 = startCords[0];
+        //int y1 = startCords[1];
 
         // put bomber på tilfældige pladser:
         for (int i = 0; i < bombCount; i++){
@@ -43,7 +43,7 @@ public class Board {
         for (int i = 0; i < size[0];i++){
             for(int j = 0; j<size[1];j++){
                 try{
-                    if (newBoard[i][j][0] !=("B")){
+                    if (newBoard[i][j][0] != ("B")){
                         // sæt bræt værdi til antal bomber fundet:
                         newBoard[i][j][0] = String.valueOf(countBombs(new int[]{i,j},newBoard));
                     }

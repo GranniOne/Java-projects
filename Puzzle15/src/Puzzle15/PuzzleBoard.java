@@ -1,6 +1,4 @@
-
 package Puzzle15;
-import Puzzle15.Main;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -44,8 +42,7 @@ public class PuzzleBoard {
     // metode som giver et puzzleboard som er et træk fra færdigt
     int[][] getValidatedPuzzleBoard(Boolean rigged){
         if(rigged == true){
-            int[][] riggedBoard = {{1,5,9,-1},{2,6,10,13},{3,7,11,14},{4,8,12,15}};
-            return riggedBoard;
+            return new int[][]{{1,5,9,-1},{2,6,10,13},{3,7,11,14},{4,8,12,15}};
         }else{
             return getValidatedPuzzleBoard();
         }

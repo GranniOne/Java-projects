@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -82,6 +81,7 @@ public class ChessBoard_GUI extends JPanel implements MouseListener {
                     //klistre billeder på lorten
                     try {
                         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(chessBoard.chessBoard[i][j]+".png");
+                        assert inputStream != null;
                         Image image = ImageIO.read(inputStream);
                         g.drawImage(image, 80*j+10+300, 80*i+10+50,60,60, this);
                     } catch (IOException e) {
