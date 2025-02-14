@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/2048 Game/2048 Game.iml" filepath="$PROJECT_DIR$/2048 Game/2048 Game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DrawingRust/DrawingRust.iml" filepath="$PROJECT_DIR$/DrawingRust/DrawingRust.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Java-projects.iml" filepath="$PROJECT_DIR$/Java-projects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MediaPlayer/MediaPlayer.iml" filepath="$PROJECT_DIR$/MediaPlayer/MediaPlayer.iml" />
+    </modules>
+  </component>
+</project>
