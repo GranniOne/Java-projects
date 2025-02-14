@@ -1,7 +1,6 @@
 package MediaPlayer;
 import MineSweeper.Board;
 
-
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -12,8 +11,7 @@ public class Main {
         // to see how IntelliJ IDEA suggests fixing it.
         System.out.printf("Hello and welcome!");
 
-        Board board = new Board();
-        board.winCheck();
+
 
 
         for (int i = 1; i <= 5; i++) {
