@@ -13,10 +13,8 @@ public class ImagePanel extends JPanel implements ActionListener {
     float opacity = 0.5f;
 
     public ImagePanel() {
-        setSize(500, 500);
-        setVisible(true);
-        image = setImage();
         timer.start();
+        setImage();
         setOpaque(false);
     }
 
@@ -35,24 +33,28 @@ public class ImagePanel extends JPanel implements ActionListener {
         }
     }
 
-    public BufferedImage setImage() {
+    public void setImage() {
         try {
             FileDialog fileDialog = new FileDialog((Frame) null, "Select File");
             fileDialog.setVisible(true);
-            String dir = fileDialog.getDirectory();  // Get the full directory path
+            String dir = fileDialog.getDirectory();
             String file = fileDialog.getFile();
-            if (file != null) {
-                File selectedFile = new File(dir, file);  // Correct way to combine them
-                System.out.println("Correct full path: " + selectedFile.getAbsolutePath());
-                image = ImageIO.read(selectedFile);
-            }
 
-            return image;
+            if (file != null) {
+                File selectedFile = new File(dir, file);
+                BufferedImage newImage = ImageIO.read(selectedFile);
+
+                if (newImage != null) {
+                    image = newImage; // Update only if successfully loaded
+                    Main.frame.setSize(image.getWidth(), image.getHeight());
+
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
+
 
     Timer timer = new Timer(1000, e -> repaint());
 
