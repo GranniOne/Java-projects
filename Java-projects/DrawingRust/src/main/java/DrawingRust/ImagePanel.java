@@ -3,12 +3,12 @@ package DrawingRust;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
+import static DrawingRust.Main.frame;
 
-public class ImagePanel extends JPanel implements ActionListener {
+public class ImagePanel extends JPanel {
     private BufferedImage image = new BufferedImage(500, 500, BufferedImage.TYPE_INT_ARGB);
     float opacity = 0.5f;
 
@@ -46,7 +46,7 @@ public class ImagePanel extends JPanel implements ActionListener {
 
                 if (newImage != null) {
                     image = newImage; // Update only if successfully loaded
-                    Main.frame.setSize(image.getWidth(), image.getHeight());
+                    frame.setSize(image.getWidth(), image.getHeight());
 
                 }
             }
@@ -57,12 +57,5 @@ public class ImagePanel extends JPanel implements ActionListener {
 
 
     Timer timer = new Timer(1000, e -> repaint());
-
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 
 }

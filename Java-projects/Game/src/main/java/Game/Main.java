@@ -1,4 +1,4 @@
-package game2048;
+package Game;
 
 import javax.swing.*;
 

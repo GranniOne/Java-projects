@@ -1,15 +1,11 @@
 package DrawingRust;
 
-import com.sun.jna.*;
-import com.sun.jna.win32.StdCallLibrary;
+
+import com.github.kwhat.jnativehook.GlobalScreen;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 
 public class Main {
-    public static JFrame frame = new JFrame("Click-Through Example");
-    static boolean isLocked = false;
-    static boolean isTransparent = false;
+    public static WindowsApiCall frame = new WindowsApiCall();
 
     public static void main(String[] args) {
         // Set up the JFrame
@@ -19,7 +15,12 @@ public class Main {
         frame.setSize(500, 500);
         frame.add(new ImagePanel());
         frame.setAlwaysOnTop(true);
+        frame.setVisible(true);
 
+        frame.Running();
+
+
+        /*
         // Add MouseListener to handle dragging
         Point initialClick = new Point();
         frame.addMouseListener(new MouseAdapter() {
@@ -40,6 +41,10 @@ public class Main {
                 frame.setLocation(newX, newY);
             }
         });
+
+         */
+
+        /*
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -63,71 +68,17 @@ public class Main {
             }
         });
 
+         */
+
         // Make the frame visible
-        frame.setVisible(true);
+        //frame.setVisible(true);
+
+
+
+
     }
 
-    // Method to toggle click-through using Windows API
-    private static void toggleClickThrough() {
-        // Check if the platform is Windows
-        if (isWindows()) {
-            // Get the native window handle (HWND) of the JFrame directly via JNA
-            Pointer hwnd = getWindowHandle(frame);
-
-            if (hwnd != null) {
-                // Get current window styles
-                int currentStyle = User32.INSTANCE.GetWindowLongPtrA(hwnd, User32.GWL_EXSTYLE);
-
-                if (!isLocked) {
-                    // If it's already in click-through mode, remove the style (undo the click-through)
-                    User32.INSTANCE.SetWindowLongPtrA(hwnd, User32.GWL_EXSTYLE, currentStyle & User32.WS_EX_LAYERED & ~User32.WS_EX_TRANSPARENT & ~User32.WS_EX_COMPOSITED);
-                    System.out.println("Window is no longer click-through.");
-                } else {
-                    // If it's not in click-through mode, apply the transparent and layered styles
-                    User32.INSTANCE.SetWindowLongPtrA(hwnd, User32.GWL_EXSTYLE, currentStyle | User32.WS_EX_LAYERED | User32.WS_EX_TRANSPARENT | User32.WS_EX_COMPOSITED);
-                    System.out.println("Window is now click-through and transparent with compositing.");
-                }
-            }
-        } else {
-            System.out.println("This functionality is only supported on Windows.");
-        }
-    }
-
-
-    // Use JNA to directly get the HWND of the JFrame
-    private static Pointer getWindowHandle(JFrame frame) {
-        try {
-            // Call the native method to get the window handle directly via JNA
-            return User32.INSTANCE.GetForegroundWindow();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     // Check if the current platform is Windows
-    private static boolean isWindows() {
-        return System.getProperty("os.name").toLowerCase().contains("win");
-    }
 
-    // JNA interface for User32 DLL methods
-    public interface User32 extends StdCallLibrary {
-        User32 INSTANCE = Native.load("user32", User32.class);
-        int GWL_EXSTYLE = -20;
-        int WS_EX_LAYERED = 0x80000;
-        int WS_EX_TRANSPARENT = 0x20;
-        int WS_EX_COMPOSITED = 0x02000000;
-
-        // Native method for GetWindowLongPtr (Windows 64-bit)
-        int GetWindowLongPtrA(Pointer hwnd, int nIndex);
-        // Native method for SetWindowLongPtr
-        int SetWindowLongPtrA(Pointer hwnd, int nIndex, int dwNewLong);
-
-        // Native method for SetLayeredWindowAttributes
-        boolean SetLayeredWindowAttributes(Pointer hwnd, int crKey, byte bAlpha, int dwFlags);
-
-        // Native method for GetForegroundWindow to retrieve the current window handle
-        Pointer GetForegroundWindow();
-    }
 }

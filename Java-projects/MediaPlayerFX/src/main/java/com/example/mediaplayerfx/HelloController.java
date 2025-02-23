@@ -1,5 +1,5 @@
 package com.example.mediaplayerfx;
-
+/*
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -12,3 +12,5 @@ public class HelloController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 }
+
+ */
