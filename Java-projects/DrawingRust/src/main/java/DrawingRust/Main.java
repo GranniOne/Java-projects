@@ -1,23 +1,27 @@
 package DrawingRust;
 
 
-import com.github.kwhat.jnativehook.GlobalScreen;
 import javax.swing.*;
+
 
 public class Main {
     public static WindowsApiCall frame = new WindowsApiCall();
 
     public static void main(String[] args) {
+
+
+
         // Set up the JFrame
         frame.setUndecorated(true);
-        frame.setOpacity(0.5f); // Set transparency
+        //frame.setOpacity(0.5f); // Set transparency
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 500);
         frame.add(new ImagePanel());
         frame.setAlwaysOnTop(true);
         frame.setVisible(true);
-
         frame.Running();
+
+
 
 
         /*

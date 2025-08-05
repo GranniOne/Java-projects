@@ -19,5 +19,8 @@ include(
     "MediaPlayerFX",
     "MineSweeper",
     "HubMenu",
-    "DrawingRust"
+    "DrawingRust",
+    "AutoClicker",
+    "PolymorfTest",
+    "JavaEventFire",
 )

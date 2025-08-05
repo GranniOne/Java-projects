@@ -19,6 +19,6 @@ subprojects {
     }
 
     tasks.withType<JavaCompile> {
-        options.release.set(21) // Ensure Java 23 compatibility
+        options.release.set(21) // Ensure Java 21 compatibility
     }
 }

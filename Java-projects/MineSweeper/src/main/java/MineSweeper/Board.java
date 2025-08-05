@@ -65,7 +65,7 @@ public class Board {
             }
         }
 
-    return false;
+        return false;
     }
 
     // metode til at tælle bomber rundt om et koordinat

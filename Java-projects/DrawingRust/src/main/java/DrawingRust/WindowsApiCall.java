@@ -22,8 +22,11 @@ public class WindowsApiCall extends JFrame {
     private static boolean dragging = false;
     private static WinDef.HWND targetWindow;
 
+
+
     WindowsApiCall(){
         setTitle("DrawingRust");
+
     }
 
 
@@ -95,14 +98,14 @@ public class WindowsApiCall extends JFrame {
             if (vkCode == 0x70) { // 0x70 = Virtual Key for 'F1'
                 isLocked = !isLocked;
                 toggleClickThrough(isLocked);
-                System.out.println("Click-through mode: " + (isLocked ? "Enabled" : "Disabled"));
+                //System.out.println("Click-through mode: " + (isLocked ? "Enabled" : "Disabled"));
                 return new WinDef.LRESULT(1);
             }
 
             // Toggle Transparency (F2 Key)
             if (vkCode == 0x71) { // 0x71 = Virtual Key for F2
                 isTransparent = !isTransparent;
-                setOpacity(isTransparent ? 0f : 0.5f);
+                //setOpacity(isTransparent ? 0f : 0.5f);
                 System.out.println("Transparency: " + (isTransparent ? "Fully Transparent" : "50% Opacity"));
                 return new WinDef.LRESULT(1);
             }
@@ -147,21 +150,28 @@ public class WindowsApiCall extends JFrame {
 
 
     // Method to toggle click-through using Windows API
-    static void toggleClickThrough(boolean isLocked) {
+     void toggleClickThrough(boolean isLocked) {
         // Check if the platform is Windows
         if (isWindows()) {
+            int LWA_ALPHA = 0x2;
+            byte alpha = (byte) 50;
             // Get the native window handle (HWND) of the JFrame directly via JNA
             WinDef.HWND hwnd = getWindowHandle();
             if (hwnd != null) {
                 // Get current window styles
-                int currentStyle = User32.INSTANCE.GetWindowLongPtrA(hwnd.getPointer(), User32.GWL_EXSTYLE);
+                //int currentStyle = User32.INSTANCE.GetWindowLongPtrA(hwnd.getPointer(), User32.GWL_EXSTYLE);
+
                 if (!isLocked) {
 
-                    // If it's already in click-through mode, remove the style (undo the click-through)
-                    User32.INSTANCE.SetWindowLongPtrA(hwnd.getPointer(), User32.GWL_EXSTYLE, currentStyle & User32.WS_EX_LAYERED & ~User32.WS_EX_TRANSPARENT & ~User32.WS_EX_COMPOSITED);
+
+
+                    User32.INSTANCE.SetWindowLongPtrA(hwnd.getPointer(), User32.GWL_EXSTYLE,   User32.WS_EX_LAYERED & ~User32.WS_EX_TRANSPARENT & ~User32.WS_EX_COMPOSITED);
+                    User32.INSTANCE.SetLayeredWindowAttributes(hwnd, 0, new WinDef.BYTE(0), new WinDef.DWORD(0));
                 } else {
                     // If it's not in click-through mode, apply the transparent and layered styles
-                    User32.INSTANCE.SetWindowLongPtrA(hwnd.getPointer(), User32.GWL_EXSTYLE, currentStyle | User32.WS_EX_LAYERED | User32.WS_EX_TRANSPARENT | User32.WS_EX_COMPOSITED);
+                    User32.INSTANCE.SetWindowLongPtrA(hwnd.getPointer(), User32.GWL_EXSTYLE, User32.WS_EX_LAYERED | User32.WS_EX_TRANSPARENT | User32.WS_EX_COMPOSITED);
+                    User32.INSTANCE.SetLayeredWindowAttributes(hwnd, 0, new WinDef.BYTE(alpha), new WinDef.DWORD(LWA_ALPHA));
+
                 }
             }
         }
@@ -198,6 +208,8 @@ public class WindowsApiCall extends JFrame {
         int WS_EX_TRANSPARENT = 0x20;
         int WS_EX_COMPOSITED = 0x02000000;
 
+        int RDW_ERASE = 0x0004;
+
         // Native method for GetWindowLongPtr (Windows 64-bit)
         int GetWindowLongPtrA(Pointer hwnd, int nIndex);
         // Native method for SetWindowLongPtr
@@ -223,6 +235,12 @@ public class WindowsApiCall extends JFrame {
         boolean MoveWindow(Pointer hwnd, int x, int y, int width, int height, boolean repaint);
 
         void GetWindowRect(WinDef.HWND targetWindow, WinDef.RECT rect);
+
+
+      boolean SetLayeredWindowAttributes (WinDef.HWND hwnd, int pcrKey, WinDef.BYTE pAlpha, WinDef.DWORD pdwFlags);
+
+
+
 
     }
 
